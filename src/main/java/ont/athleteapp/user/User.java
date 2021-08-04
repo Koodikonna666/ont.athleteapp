@@ -1,5 +1,6 @@
 package ont.athleteapp.user;
 
+//Käytä java.persistence, koska esim. org.hibernate importtia käyttämällä tulevat muutokset saattavat rikkoa koodin.
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

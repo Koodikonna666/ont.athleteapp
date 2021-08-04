@@ -15,6 +15,7 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    //@Aurowired injektoi userReposirotyn
     @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
