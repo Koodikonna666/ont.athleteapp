@@ -4,7 +4,7 @@ package ont.athleteapp.user;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users", uniqueConstraints = {@UniqueConstraint(name="student_email_unique", columnNames = "email")})
+@Table(name = "users")
 public class User {
 
 	//Käytä numeerisessa primary keyssä ennemmin Long kuin int koska int saattaa vaikuttaa jossain tapauksissa suorituskykyyn
@@ -18,7 +18,7 @@ public class User {
 	private String firstName;
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
-	@Column(name = "email", nullable = false)
+	@Column(name = "email", nullable = false, unique = true)
 	private String email;
 	@Column(name = "role", nullable = false)
 	private String role;
