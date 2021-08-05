@@ -1,25 +1,26 @@
 package ont.athleteapp.user;
 
 //Käytä java.persistence, koska esim. org.hibernate importtia käyttämällä tulevat muutokset saattavat rikkoa koodin.
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-//import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(name="student_email_unique", columnNames = "email")})
 public class User {
 
-	//Alla olevaa SequenceGeneratoria tulee käyttää Oraclen palvelujen kanssa. Oracle ei toimi GenerationType.IDENTITY strategian kanssa.
-	//@SequenceGenerator(name = "user_sequense", sequenceName = "user_sequence", allocationSize = 1)
+	//Käytä numeerisessa primary keyssä ennemmin Long kuin int koska int saattaa vaikuttaa jossain tapauksissa suorituskykyyn
+	//Alla olevaa SequenceGeneratoria tulee käyttää mm. Oraclen palvelujen kanssa. Oracle ei toimi GenerationType.IDENTITY strategian kanssa
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+	@SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence")
+	@Column(updatable = false)
 	private Long id;
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
+	@Column(name = "email", nullable = false)
 	private String email;
+	@Column(name = "role", nullable = false)
 	private String role;
 	
 	public User() {
