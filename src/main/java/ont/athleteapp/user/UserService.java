@@ -53,15 +53,12 @@ public class UserService {
 
             if(firstName != null){
                 user.setFirstName(firstName);
-
             }
             if(lastName != null){
                 user.setLastName(lastName);
-
             }
             if(role != null){
                 user.setRole(role);
-
             }
 
         if(email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {
