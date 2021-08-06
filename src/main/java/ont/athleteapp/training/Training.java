@@ -17,15 +17,15 @@ public class Training {
     private LocalTime time;
     @Column(name = "training_type")
     private  String trainingType;
-    private int duration;
-    private int strain;
-    private int feeling;
+    private Long duration;
+    private Long strain;
+    private Long feeling;
 
     public Training(){
 
     }
 
-    public Training(long id, LocalDate date, LocalTime time, String trainingType, int duration, int strain, int feeling) {
+    public Training(long id, LocalDate date, LocalTime time, String trainingType, Long duration, Long strain, Long feeling) {
         this.id = id;
         this.date = date;
         this.time = time;
@@ -67,27 +67,27 @@ public class Training {
         this.trainingType = trainingType;
     }
 
-    public int getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
-    public int getStrain() {
+    public Long getStrain() {
         return strain;
     }
 
-    public void setStrain(int strain) {
+    public void setStrain(Long strain) {
         this.strain = strain;
     }
 
-    public int getFeeling() {
+    public Long getFeeling() {
         return feeling;
     }
 
-    public void setFeeling(int feeling) {
+    public void setFeeling(Long feeling) {
         this.feeling = feeling;
     }
 
