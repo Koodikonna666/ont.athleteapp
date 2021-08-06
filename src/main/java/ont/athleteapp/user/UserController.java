@@ -1,6 +1,7 @@
 package ont.athleteapp.user;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +30,12 @@ public class UserController {
         return userService.getUsers();
     }
 
+    @GetMapping(path = "/user")
+    public Optional<User> getUser(@RequestParam("email") String email) {
+        return userService.getUserWithEmail(email);
+    }
+
+
     @PostMapping
     public void registerNewUser(@RequestBody User user) { //@Requestbody hakee tiedot user olioon
         userService.addNewUser(user);
@@ -40,8 +47,8 @@ public class UserController {
     }
 
     @PutMapping(path="{studentId}")
-    public void updateUser(@PathVariable("studentId") Long userId, @RequestParam(required = false) String email) {
-        userService.updateUser(userId, email);
+    public void updateUser(@PathVariable("studentId") Long userId, @RequestParam(required = false) String email, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName, @RequestParam(required = false) String role) {
+        userService.updateUser(userId, email, firstName, lastName, role);
     }
 
 
