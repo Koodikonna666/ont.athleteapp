@@ -1,8 +1,7 @@
 package ont.athleteapp.training;
 
-import net.bytebuddy.implementation.bind.MethodDelegationBinder;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,7 +20,7 @@ public class TrainingService {
     }
 
     public List<Training> getTrainings() {
-        return trainingRepository.findAll();
+        return trainingRepository.findAll(Sort.by(Sort.Direction.ASC, "date"));
     }
 
     public List<Training> getTrainingsByDay(LocalDate date){
