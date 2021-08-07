@@ -1,9 +1,6 @@
 package ont.athleteapp.training;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -12,6 +9,9 @@ import java.time.LocalTime;
 public class Training {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence")
+    @Column(updatable = false)
     private long id;
     private LocalDate date;
     private LocalTime time;

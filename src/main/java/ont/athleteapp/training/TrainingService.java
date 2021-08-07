@@ -1,5 +1,7 @@
 package ont.athleteapp.training;
 
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,8 +24,21 @@ public class TrainingService {
         return trainingRepository.findAll();
     }
 
+    public List<Training> getTrainingsByDay(LocalDate date){
+        return trainingRepository.findByDate(date);
+    }
+
     public void addTraining(Training training){
         trainingRepository.save(training);
+    }
+
+    public void deleteTraining(Long trainingId){
+        System.out.println(trainingId);
+        boolean exists = trainingRepository.existsById(trainingId);
+        if(!exists){
+            throw new IllegalStateException("Training with id " + trainingId + " does not exists");
+        }
+        trainingRepository.deleteById(trainingId);
     }
 
     @Transactional

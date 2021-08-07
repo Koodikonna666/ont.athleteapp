@@ -35,7 +35,6 @@ public class UserController {
         return userService.getUserWithEmail(email);
     }
 
-
     @PostMapping
     public void registerNewUser(@RequestBody User user) { //@Requestbody hakee tiedot user olioon
         userService.addNewUser(user);
