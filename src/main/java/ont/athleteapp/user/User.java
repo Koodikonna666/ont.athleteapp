@@ -2,6 +2,7 @@ package ont.athleteapp.user;
 
 //Käytä java.persistence, koska esim. org.hibernate importtia käyttämällä tulevat muutokset saattavat rikkoa koodin.
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "users")
@@ -22,17 +23,20 @@ public class User {
 	private String email;
 	@Column(name = "role", nullable = false)
 	private String role;
-	
+	@Column(name = "b_day")
+	private LocalDate bDay;
+
 	public User() {
 		
 	}
 	
-	public User(Long id, String firstName, String lastName, String email, String role) {
+	public User(Long id, String firstName, String lastName, String email, String role, LocalDate bDay) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.role = role;
+		this.bDay = bDay;
 	}
 	
 	public User (String firstName, String lastName, String email, String role) {
@@ -80,6 +84,14 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public LocalDate getbDay() {
+		return bDay;
+	}
+
+	public void setbDay(LocalDate bDay) {
+		this.bDay = bDay;
 	}
 
 	@Override

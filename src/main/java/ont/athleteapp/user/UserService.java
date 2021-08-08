@@ -1,6 +1,7 @@
 package ont.athleteapp.user;
 
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -48,7 +49,7 @@ public class UserService {
 
     //@Transactional annotaatio hoitaa tietokannan päivittämisen. Entity menee "manage" tilaan
     @Transactional
-    public void updateUser(Long userId, String email, String firstName, String lastName, String role) {
+    public void updateUser(Long userId, String email, String firstName, String lastName, String role, LocalDate bDay) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("User with id " + userId + " does not exist"));
 
             if(firstName != null){
@@ -59,6 +60,9 @@ public class UserService {
             }
             if(role != null){
                 user.setRole(role);
+            }
+            if(bDay != null){
+                user.setbDay(bDay);
             }
 
         if(email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {

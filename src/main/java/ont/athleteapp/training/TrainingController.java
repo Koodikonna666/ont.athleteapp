@@ -25,8 +25,10 @@ public class TrainingController {
         return trainingService.getTrainings();
     }
 
+    //Käytä @DateTimeFormat koska muuten tulee parse errori kun urlista saatava tieto on String muotoa.
+    // @DateTimeFormat osaa muuttaa Stringin oikeaan muotoon
     @GetMapping(path = "/trainings/day")
-    public List<Training> getTraining(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
+    public List<Training> getTrainingsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
        return trainingService.getTrainingsByDay(date);
     }
 
@@ -44,6 +46,5 @@ public class TrainingController {
     public void updateTraining(@PathVariable("trainingId") Long trainingId, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date, @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.TIME) LocalTime time, @RequestParam(required = false) String trainingType, @RequestParam(required = false) Long duration, @RequestParam(required = false) Long strain, @RequestParam(required = false) Long feeling){
         trainingService.updateTraining(trainingId, date, time,trainingType, duration, strain, feeling);
     }
-
 
 }

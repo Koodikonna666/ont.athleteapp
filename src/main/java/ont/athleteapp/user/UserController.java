@@ -1,9 +1,11 @@
 package ont.athleteapp.user;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,8 +48,8 @@ public class UserController {
     }
 
     @PutMapping(path="{userId}")
-    public void updateUser(@PathVariable("userId") Long userId, @RequestParam(required = false) String email, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName, @RequestParam(required = false) String role) {
-        userService.updateUser(userId, email, firstName, lastName, role);
+    public void updateUser(@PathVariable("userId") Long userId, @RequestParam(required = false) String email, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName, @RequestParam(required = false) String role, @RequestParam("bDay") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate bDay) {
+        userService.updateUser(userId, email, firstName, lastName, role, bDay);
     }
 
 
