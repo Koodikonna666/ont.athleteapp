@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "athlete")
 public class Athlete {
 
     @Id
@@ -17,19 +17,35 @@ public class Athlete {
     private String events;
     private String club;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",
-    referencedColumnName = "id")
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "athlete")
     private User user;
 
     public Athlete(){
 
     }
 
+//    public Athlete(User user, Athlete athlete){
+//        this.id = athlete.id;
+//        this.events = athlete.events;
+//        this.club = athlete.club;
+//    }
+
     public Athlete(Long id, String events, String club) {
         this.id = id;
         this.events = events;
         this.club = club;
+    }
+
+    public Athlete(String events, String club) {
+        this.events = events;
+        this.club = club;
+    }
+
+    public Athlete(String events, String club, User user) {
+        this.events = events;
+        this.club = club;
+        this.user = user;
     }
 
     public Long getId() {

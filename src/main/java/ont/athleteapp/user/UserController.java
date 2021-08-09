@@ -1,10 +1,17 @@
 package ont.athleteapp.user;
 
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+import ont.athleteapp.user.athlete.Athlete;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,8 +45,8 @@ public class UserController {
     }
 
     @PostMapping
-    public void registerNewUser(@RequestBody User user) { //@Requestbody hakee tiedot user olioon
-        userService.addNewUser(user);
+    public void registerNewUser(@RequestBody ObjectNode json) { //@Requestbody hakee tiedot user olioon
+        userService.addNewAthlete(json);
     }
 
     @DeleteMapping(path="{userId}")

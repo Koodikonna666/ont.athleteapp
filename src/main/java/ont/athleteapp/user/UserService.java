@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import ont.athleteapp.user.athlete.Athlete;
+import ont.athleteapp.user.athlete.AthleteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,15 +19,42 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final AthleteRepository athleteRepository;
 
     //@Aurowired injektoi userReposirotyn
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, AthleteRepository athleteRepository) {
         this.userRepository = userRepository;
+        this.athleteRepository = athleteRepository;
     }
 
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    public void addNewAthlete(ObjectNode json){
+        JsonNode uData = json.get("user");
+        JsonNode aData = json.get("athlete");
+
+        String firstName = uData.get("firstName").asText();
+        String lastName = uData.get("lastName").asText();
+        String email = uData.get("email").asText();
+        String role = uData.get("role").asText();
+        LocalDate bDay = LocalDate.parse(uData.get("bDay").asText());
+        String events = aData.get("events").asText();
+        String club = aData.get("club").asText();
+
+        Optional<User> userByEmail = userRepository.findUserByEmail(email);
+        if(userByEmail.isPresent()) {
+            throw new IllegalStateException("Email taken");
+        }
+
+        User user = new User(firstName, lastName, email, role, bDay);
+        Athlete athlete = new Athlete(events, club, user);
+        System.out.println(athlete);
+
+       athleteRepository.save(athlete);
+
     }
 
     public void addNewUser(User user) {
