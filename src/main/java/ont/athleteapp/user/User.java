@@ -26,18 +26,18 @@ public class User {
 	private String email;
 	@Column(name = "role", nullable = false)
 	private String role;
-	@Column(name = "b_day", nullable = true)
+	@Column(name = "b_day")
 	private LocalDate bDay;
-
-	@PrimaryKeyJoinColumn
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "athlete_id")
-	private Athlete athlete;
 
 	@PrimaryKeyJoinColumn
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "coach_id")
 	private Coach coach;
+
+	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "athlete_id")
+	private Athlete athlete;
 
 
 	public User() {

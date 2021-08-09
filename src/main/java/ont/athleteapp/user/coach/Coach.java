@@ -5,7 +5,7 @@ import ont.athleteapp.user.User;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "coach")
 public class Coach {
 
     @Id
@@ -26,6 +26,12 @@ public class Coach {
 
     public Coach(Long id, String events, String degree) {
         this.id = id;
+        this.events = events;
+        this.degree = degree;
+    }
+
+    public Coach(String events, String degree, User user) {
+        this.user = user;
         this.events = events;
         this.degree = degree;
     }

@@ -46,7 +46,7 @@ public class UserController {
 
     @PostMapping
     public void registerNewUser(@RequestBody ObjectNode json) { //@Requestbody hakee tiedot user olioon
-        userService.addNewAthlete(json);
+        userService.addNewUser(json);
     }
 
     @DeleteMapping(path="{userId}")
