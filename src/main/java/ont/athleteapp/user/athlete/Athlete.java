@@ -25,12 +25,6 @@ public class Athlete {
 
     }
 
-//    public Athlete(User user, Athlete athlete){
-//        this.id = athlete.id;
-//        this.events = athlete.events;
-//        this.club = athlete.club;
-//    }
-
     public Athlete(Long id, String events, String club) {
         this.id = id;
         this.events = events;

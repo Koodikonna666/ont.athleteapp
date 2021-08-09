@@ -2,6 +2,7 @@ package ont.athleteapp.user;
 
 //Käytä java.persistence, koska esim. org.hibernate importtia käyttämällä tulevat muutokset saattavat rikkoa koodin.
 import ont.athleteapp.user.athlete.Athlete;
+import ont.athleteapp.user.coach.Coach;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -32,6 +33,12 @@ public class User {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "athlete_id")
 	private Athlete athlete;
+
+	@PrimaryKeyJoinColumn
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "coach_id")
+	private Coach coach;
+
 
 	public User() {
 		

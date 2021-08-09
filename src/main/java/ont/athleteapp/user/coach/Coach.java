@@ -16,8 +16,8 @@ public class Coach {
     private String events;
     private String degree;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @MapsId
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "coach")
     private User user;
 
     public Coach(){
