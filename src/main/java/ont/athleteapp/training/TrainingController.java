@@ -1,6 +1,7 @@
 package ont.athleteapp.training;
 
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -25,16 +26,16 @@ public class TrainingController {
         return trainingService.getTrainings();
     }
 
-    //Käytä @DateTimeFormat koska muuten tulee parse errori kun urlista saatava tieto on String muotoa.
-    // @DateTimeFormat osaa muuttaa Stringin oikeaan muotoon
+/*    Käytä @DateTimeFormat koska muuten tulee parse errori kun urlista saatava tieto on String muotoa.
+     @DateTimeFormat osaa muuttaa Stringin oikeaan muotoon*/
     @GetMapping(path = "/trainings/day")
     public List<Training> getTrainingsByDate(@RequestParam("date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date){
        return trainingService.getTrainingsByDay(date);
     }
 
     @PostMapping
-    public void addTraining(@RequestBody Training training) {
-        trainingService.addTraining(training);
+    public void addTraining(@RequestBody ObjectNode json) {
+        trainingService.addTraining(json);
     }
 
     @DeleteMapping(path = "{trainingId}")

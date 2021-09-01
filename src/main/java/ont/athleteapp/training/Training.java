@@ -1,5 +1,8 @@
 package ont.athleteapp.training;
 
+import ont.athleteapp.training.speed.SpeedTraining;
+import ont.athleteapp.training.strength.StrengthTraining;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,7 +13,7 @@ public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence")
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize=1)
     @Column(updatable = false)
     private long id;
     private LocalDate date;
@@ -21,12 +24,28 @@ public class Training {
     private Long strain;
     private Long feeling;
 
-    public Training(){
+    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "speed_training_id")
+    private SpeedTraining speedTraining;
 
-    }
+    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "strength_training_id")
+    private StrengthTraining strengthTraining;
+
 
     public Training(long id, LocalDate date, LocalTime time, String trainingType, Long duration, Long strain, Long feeling) {
         this.id = id;
+        this.date = date;
+        this.time = time;
+        this.trainingType = trainingType;
+        this.duration = duration;
+        this.strain = strain;
+        this.feeling = feeling;
+    }
+
+    public Training(LocalDate date, LocalTime time, String trainingType, Long duration, Long strain, Long feeling) {
         this.date = date;
         this.time = time;
         this.trainingType = trainingType;

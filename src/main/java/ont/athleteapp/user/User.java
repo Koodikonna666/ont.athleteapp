@@ -15,7 +15,7 @@ public class User {
 	//Alla olevaa SequenceGeneratoria tulee käyttää mm. Oraclen palvelujen kanssa. Oracle ei toimi GenerationType.IDENTITY strategian kanssa
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-	@SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence")
+	@SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize=1)
 	@Column(updatable = false)
 	private Long id;
 	@Column(name = "first_name", nullable = false)
@@ -59,13 +59,7 @@ public class User {
 		this.role = role;
 		this.bDay = bDay;
 	}
-	
-	public User (String firstName, String lastName, String email, String role) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.role = role;
-	}
+
 
 	public Long getId() {
 		return id;

@@ -38,33 +38,32 @@ public class UserService {
 
     public void addNewUser(ObjectNode json){
 //      Tallennetaan jsonista haetut tiedot oikeaan muotoon
-        JsonNode uData = json.get("user");
-        JsonNode iData = json.get("info");
+        JsonNode userData = json.get("user");
+        JsonNode infoData = json.get("info");
 
-        String firstName = uData.get("firstName").asText();
-        String lastName = uData.get("lastName").asText();
-        String email = uData.get("email").asText();
-        String role = uData.get("role").asText();
-        LocalDate bDay = LocalDate.parse(uData.get("bDay").asText());
+        String firstName = userData.get("firstName").asText();
+        String lastName = userData.get("lastName").asText();
+        String email = userData.get("email").asText();
+        String role = userData.get("role").asText();
+        LocalDate bDay = LocalDate.parse(userData.get("bDay").asText());
 
 //      Tarkistetaan onko sähköpostilla tehty jo käyttäjää
         Optional<User> userByEmail = userRepository.findUserByEmail(email);
         if(userByEmail.isPresent()) {
             throw new IllegalStateException("Email taken");
         }
-        System.out.println(iData);
 
         User user = new User(firstName, lastName, email, role, bDay);
 
 //      Tarkistetaan onko lisättävä käyttäjä urheilija vai valmentaja ja hoidetaan tietokantatallennus
         if(role.equals("athlete")){
-            String aEvents = iData.get("events").asText();
-            String club = iData.get("club").asText();
+            String aEvents = infoData.get("events").asText();
+            String club = infoData.get("club").asText();
             Athlete athlete = new Athlete(aEvents, club, user);
             athleteRepository.save(athlete);
         }else if(role.equals("coach")){
-            String cEvents = iData.get("events").asText();
-            String degree = iData.get("degree").asText();
+            String cEvents = infoData.get("events").asText();
+            String degree = infoData.get("degree").asText();
             Coach coach = new Coach(cEvents, degree, user);
             coachRepository.save(coach);
         }else{
