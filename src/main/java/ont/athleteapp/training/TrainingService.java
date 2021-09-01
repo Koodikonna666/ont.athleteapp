@@ -2,6 +2,8 @@ package ont.athleteapp.training;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import ont.athleteapp.training.endurance.EnduranceTraining;
+import ont.athleteapp.training.endurance.EnduranceTrainingRepository;
 import ont.athleteapp.training.speed.SpeedTraining;
 import ont.athleteapp.training.speed.SpeedTrainingRepository;
 import ont.athleteapp.training.strength.StrengthTraining;
@@ -21,12 +23,15 @@ public class TrainingService {
     private final TrainingRepository trainingRepository;
     private final SpeedTrainingRepository speedTrainingRepository;
     private final StrengthTrainingRepository strengthTrainingRepository;
+    private final EnduranceTrainingRepository enduranceTrainingRepository;
 
     @Autowired
-    public TrainingService(TrainingRepository trainingRepository, SpeedTrainingRepository speedTrainingRepository, StrengthTrainingRepository strengthTrainingRepository) {
+    public TrainingService(TrainingRepository trainingRepository, SpeedTrainingRepository speedTrainingRepository, StrengthTrainingRepository strengthTrainingRepository, EnduranceTrainingRepository enduranceTrainingRepository) {
         this.trainingRepository = trainingRepository;
         this.speedTrainingRepository = speedTrainingRepository;
         this.strengthTrainingRepository = strengthTrainingRepository;
+        this.enduranceTrainingRepository = enduranceTrainingRepository;
+
     }
 
     public List<Training> getTrainings() {
@@ -73,7 +78,14 @@ public class TrainingService {
             strengthTrainingRepository.save(strengthTraining);
         }
 
-//        trainingRepository.save(training);
+        if(trainingType.equals("endurance")){
+            String tempoRuns = trainingData.get("tempoRuns").asText();
+            String jogging = trainingData.get("jogging").asText();
+            String comments = trainingData.get("comments").asText();
+
+            EnduranceTraining enduranceTraining = new EnduranceTraining(tempoRuns, jogging, comments, training);
+            enduranceTrainingRepository.save(enduranceTraining);
+        }
 
     }
 

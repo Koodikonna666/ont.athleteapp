@@ -1,5 +1,6 @@
 package ont.athleteapp.training;
 
+import ont.athleteapp.training.endurance.EnduranceTraining;
 import ont.athleteapp.training.speed.SpeedTraining;
 import ont.athleteapp.training.strength.StrengthTraining;
 
@@ -13,13 +14,13 @@ public class Training {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize=1)
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
     @Column(updatable = false)
     private long id;
     private LocalDate date;
     private LocalTime time;
     @Column(name = "training_type")
-    private  String trainingType;
+    private String trainingType;
     private Long duration;
     private Long strain;
     private Long feeling;
@@ -33,6 +34,11 @@ public class Training {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "strength_training_id")
     private StrengthTraining strengthTraining;
+
+    @PrimaryKeyJoinColumn
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endurance_training_id")
+    private EnduranceTraining enduranceTraining;
 
 
     public Training(long id, LocalDate date, LocalTime time, String trainingType, Long duration, Long strain, Long feeling) {
