@@ -21,9 +21,13 @@ public class EnduranceTraining {
     private String comments;
 
     @MapsId
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "enduranceTraining")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id", referencedColumnName = "id")
     private Training training;
 
+    public EnduranceTraining(){
+
+    }
 
     public EnduranceTraining(String tempoRuns, String jogging, String comments, Training training) {
         this.tempoRuns = tempoRuns;

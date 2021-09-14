@@ -36,6 +36,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
+
     public void addNewUser(ObjectNode json){
 //      Tallennetaan jsonista haetut tiedot oikeaan muotoon
         JsonNode userData = json.get("user");
@@ -118,6 +119,5 @@ public class UserService {
                 user.setEmail(email);
         }
     }
-
 
 }

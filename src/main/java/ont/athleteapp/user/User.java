@@ -16,7 +16,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
 	@SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize=1)
-	@Column(updatable = false)
+	@Column(name = "id", updatable = false)
 	private Long id;
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
@@ -30,15 +30,12 @@ public class User {
 	private LocalDate bDay;
 
 	@PrimaryKeyJoinColumn
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "coach_id")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	private Coach coach;
 
 	@PrimaryKeyJoinColumn
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "athlete_id")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
 	private Athlete athlete;
-
 
 	public User() {
 		

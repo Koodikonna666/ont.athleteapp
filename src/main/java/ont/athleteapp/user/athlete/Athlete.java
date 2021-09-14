@@ -3,22 +3,20 @@ package ont.athleteapp.user.athlete;
 import ont.athleteapp.user.User;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "athlete")
 public class Athlete {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "athlete_sequence")
-    @SequenceGenerator(name = "athlete_sequence", sequenceName = "athlete_sequence")
     @Column(updatable = false)
     private Long id;
     private String events;
     private String club;
 
     @MapsId
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "athlete")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Athlete(){

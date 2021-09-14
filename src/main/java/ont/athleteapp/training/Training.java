@@ -26,20 +26,20 @@ public class Training {
     private Long feeling;
 
     @PrimaryKeyJoinColumn
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "speed_training_id")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "training")
     private SpeedTraining speedTraining;
 
     @PrimaryKeyJoinColumn
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "strength_training_id")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy ="training")
     private StrengthTraining strengthTraining;
 
     @PrimaryKeyJoinColumn
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "endurance_training_id")
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "training")
     private EnduranceTraining enduranceTraining;
 
+    public Training(){
+
+    }
 
     public Training(long id, LocalDate date, LocalTime time, String trainingType, Long duration, Long strain, Long feeling) {
         this.id = id;

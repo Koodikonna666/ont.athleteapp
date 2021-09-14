@@ -86,7 +86,6 @@ public class TrainingService {
             EnduranceTraining enduranceTraining = new EnduranceTraining(tempoRuns, jogging, comments, training);
             enduranceTrainingRepository.save(enduranceTraining);
         }
-
     }
 
     public void deleteTraining(Long trainingId){
@@ -99,30 +98,41 @@ public class TrainingService {
     }
 
     @Transactional
-    public void updateTraining(Long id, LocalDate date, LocalTime time, String trainingType, Long duration, Long strain, Long feeling){
-        Training training = trainingRepository.findById(id).orElseThrow(() -> new IllegalStateException("Training with id " + id + " does not exist"));
-
-        if(date != null){
-            training.setDate(date);
-        }
-        if(time != null){
-            training.setTime(time);
-        }
-        if(trainingType != null){
-            training.setTrainingType(trainingType);
-        }
-        if(duration != null && duration > 0 && duration < 720){
-            training.setDuration(duration);
-        }
-        if(strain != null && strain >= 0 && strain <= 10){
-            training.setStrain(strain);
-        }
-        if(feeling != null && feeling >= 0 && feeling <= 10){
-            training.setFeeling(feeling);
-        }
+    public void updateTraining(Long id){
 
 
+//       JsonNode trainingInfo = json.get("info");
+//        JsonNode trainingData = json.get("data");
+//
+//        LocalDate date = LocalDate.parse(trainingInfo.get("date").asText());
+//        LocalTime time = LocalTime.parse(trainingInfo.get("time").asText());
+//        String trainingType = trainingInfo.get("trainingType").asText();
+//        Long duration = trainingInfo.get("duration").asLong();
+//        Long strain = trainingInfo.get("strain").asLong();
+//        Long feeling = trainingInfo.get("feeling").asLong();
+
+
+        enduranceTrainingRepository.findById(id).ifPresent(System.out::println);
+
+//        Training training = trainingRepository.findById(id).orElseThrow(() -> new IllegalStateException("Training with id " + id + " does not exist"));
+
+//        if(date != null){
+//            training.setDate(date);
+//        }
+//        if(time != null){
+//            training.setTime(time);
+//        }
+//        if(trainingType != null){
+//            training.setTrainingType(trainingType);
+//        }
+//        if(duration != null && duration > 0 && duration < 720){
+//            training.setDuration(duration);
+//        }
+//        if(strain != null && strain >= 0 && strain <= 10){
+//            training.setStrain(strain);
+//        }
+//        if(feeling != null && feeling >= 0 && feeling <= 10){
+//            training.setFeeling(feeling);
+//        }
     }
-
-
 }

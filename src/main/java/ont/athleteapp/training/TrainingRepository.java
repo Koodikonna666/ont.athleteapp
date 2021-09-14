@@ -13,4 +13,6 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
     Optional<Training> findById(String email);
     List<Training> findByDate(LocalDate date);
 
+
+
 }

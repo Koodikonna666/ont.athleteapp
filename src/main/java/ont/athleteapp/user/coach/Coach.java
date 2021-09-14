@@ -9,15 +9,14 @@ import javax.persistence.*;
 public class Coach {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "coach_sequence")
-    @SequenceGenerator(name = "coach_sequence", sequenceName = "coach_sequence", allocationSize = 1)
     @Column(updatable = false)
     private Long id;
     private String events;
     private String degree;
 
     @MapsId
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "coach")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Coach(){

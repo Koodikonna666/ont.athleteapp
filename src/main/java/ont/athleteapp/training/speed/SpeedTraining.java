@@ -20,7 +20,8 @@ public class SpeedTraining  {
     private String comments;
 
     @MapsId
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "speedTraining")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id", referencedColumnName = "id")
     private Training training;
 
     public SpeedTraining() {

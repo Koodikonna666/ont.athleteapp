@@ -29,10 +29,14 @@ public class StrengthTraining {
     @Column(name = "comments")
     private String comments;
 
-
     @MapsId
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "strengthTraining")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id", referencedColumnName = "id")
     private Training training;
+
+    public StrengthTraining(){
+
+    }
 
     public StrengthTraining(Long id, String squat, String powerClean, String powerSnatch, String barbellJerk, String deadlift, String straightLegDeadlift, String comments) {
         this.id = id;
