@@ -26,8 +26,8 @@ public class UserController {
 
     @GetMapping(path = "/users")
     public List<User> getUsers() {
-        return userService.getUsers();
-    }
+                                                                                                                                                                return userService.getUsers();
+                                                                                                                                                                                                                                                                                                                                }
 
     @PostMapping
     public void registerNewUser(@RequestBody User user) { //@Requestbody hakee tiedot user olioon
